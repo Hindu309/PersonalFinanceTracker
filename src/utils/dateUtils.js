@@ -1,0 +1,4 @@
+export function isSameDay(a,b){ return new Date(a).toDateString() === new Date(b).toDateString(); }
+export function isSameWeek(date,ref=new Date()){ const d=new Date(date); const r=new Date(ref); const start=new Date(r); start.setDate(r.getDate()-r.getDay()); const end=new Date(start); end.setDate(start.getDate()+6); return d>=start && d<=end; }
+export function isSameMonth(date,ref=new Date()){ const d=new Date(date); const r=new Date(ref); return d.getFullYear()===r.getFullYear() && d.getMonth()===r.getMonth(); }
+export function getTotals(expenses){ const today=new Date(); let totals={today:0,week:0,month:0}; expenses.forEach(e=>{ const d=new Date(e.date); if(isSameDay(d,today)) totals.today+=e.amount; if(isSameWeek(d,today)) totals.week+=e.amount; if(isSameMonth(d,today)) totals.month+=e.amount; }); return totals; }
